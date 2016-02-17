@@ -6,8 +6,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 
 import App from '../containers/App';
-import TodosContainer from '../containers/TodosContainer';
-import configure from '../store';
+import configure from '../store/index';
 
 const store = configure();
 
@@ -15,7 +14,6 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={App} />
-      <Route path="/todos" component={TodosContainer} />
     </Router>
   </Provider>,
   document.getElementById('root')

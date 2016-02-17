@@ -3,18 +3,20 @@
     "index": "./src/entry/index.jsx"
   },
   "dependencies": {
-    "antd": "0.11.x",
     "atool-build": "0.4.x",
     "babel-polyfill": "^6.3.14",
+    "immutable.js": "^1.1.2",
     "isomorphic-fetch": "^2.2.1",
     "react": "0.14.x",
     "react-dom": "0.14.x",
-    "react-redux": "^4.1.1",
+    "react-redux": "4.4.x",
     "react-router": "^2.0.0-rc5",
     "react-router-redux": "^2.1.0",
-    "redux": "3.0.x",
+    "redux": "3.3.x",
     "redux-actions": "0.9.x",
-    "redux-promise": "^0.6.0-alpha"
+    "redux-devtools": "^3.1.1",
+    "redux-loop": "^1.0.4",
+    "reselect": "^2.0.3"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
@@ -27,7 +29,9 @@
     "eslint": "1.10.x",
     "eslint-config-airbnb": "3.x",
     "eslint-plugin-react": "3.x",
-    "pre-commit": "1.x"
+    "pre-commit": "1.x",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-devtools-log-monitor": "^1.0.4"
   },
   "pre-commit": [
     "lint"
