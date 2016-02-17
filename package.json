@@ -16,6 +16,7 @@
     "redux-actions": "0.9.x",
     "redux-devtools": "^3.1.1",
     "redux-loop": "^1.0.4",
+    "redux-saga": "^0.8.2",
     "reselect": "^2.0.3"
   },
   "devDependencies": {

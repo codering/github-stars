@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux-loop';
+import { combineReducers } from 'redux';
 import { routeReducer as routing } from 'react-router-redux';
 import stars from './stars';
 
