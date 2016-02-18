@@ -4,11 +4,17 @@ import { Router, Route, hashHistory } from 'react-router';
 import { syncReduxAndRouter } from 'react-router-redux';
 import ReactDOM from 'react-dom';
 import React from 'react';
+import pick from 'lodash.pick';
 
 import App from '../containers/App';
 import configure from '../store/index';
 
-const store = configure();
+const data = localStorage.getItem('github');
+const initialState = data ? JSON.parse(data) : {};
+const store = configure(initialState);
+store.subscribe(() => {
+  localStorage.setItem('github', JSON.stringify(pick(store.getState(), ['stars', 'user'])));
+});
 
 ReactDOM.render(
   <Provider store={store}>

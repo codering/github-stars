@@ -2,16 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import * as StarActions from '../actions/stars';
+
+import * as starActions from '../actions/stars';
+import * as uiStateActions from '../actions/uistate';
+import * as userActions from '../actions/user';
+
 import Stars from '../components/Stars/Stars';
+import Header from '../components/Header/Header';
+import Login from '../components/Login/Login';
+import Sidebar from '../components/Sidebar/Sidebar';
+
+import 'normalize.css';
+import style from './App.less';
 
 class App extends Component {
   render() {
-    console.log(this.props);
-    const { actions, stars } = this.props;
-    return (<div>
-      <h1>Index</h1>
-      <Stars stars={stars} actions={actions} />
+    const { user, uiStateActions, starActions, userActions, stars, uistate } = this.props;
+    if (!user.login) {
+      return <Login userLogin={userActions.userLogin} />;
+    }
+    return (<div className={style.normal}>
+      <Header keyword={uistate.keyword} stars={stars} changeKeyword={uiStateActions.changeKeyword} />
+      <div className={style.mainSection}>
+        <Sidebar userInfo={user.userInfo} />
+        <Stars keyword={uistate.keyword} stars={stars} actions={starActions} />
+        <div></div>
+      </div>
     </div>);
   }
 }
@@ -19,12 +35,16 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     stars: state.stars,
+    uistate: state.uistate,
+    user: state.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(StarActions, dispatch),
+    starActions: bindActionCreators(starActions, dispatch),
+    uiStateActions: bindActionCreators(uiStateActions, dispatch),
+    userActions: bindActionCreators(userActions, dispatch),
   };
 }
 

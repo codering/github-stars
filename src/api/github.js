@@ -1,14 +1,45 @@
 import fetch from 'isomorphic-fetch';
 
-function _fetch(url, opts) {
-  function parseJSON(response) {
-    return response.json()
-  }
-  return fetch(url, opts).then(parseJSON);
+function parseLink(str) {
+  const ret = {};
+  str.split(',').forEach(function(item) {
+    var m = item.match(/<(.+?)>; rel=\"(.+?)\"/);
+    ret[m[2]] = m[1];
+  });
+  return ret;
 }
 
-export async function loadStars() {
-  const username = 'sorrycc';
-  const url = `https://api.github.com/users/${username}/starred?per_page=100&page=1`;
-  return await _fetch(url, {type: 'json'});
+function selectStar(star) {
+  const { id, owner, name, html_url, description, forks, watchers, language } = star;
+  return {
+    id, name, html_url, description, forks, watchers, language,
+    owner: {
+      avatar_url: owner.avatar_url,
+      login: owner.login,
+    },
+  };
+}
+
+function auth(opts = {}, username, password) {
+  opts.headers = opts.headers || {};
+  opts.headers.Authorization = `Basic ${btoa(`${username}:${password}`)}`;
+  return opts;
+}
+
+export async function fetchStars(url, username, password) {
+  console.log('x', url, username, password);
+  let links;
+  const result = await fetch(url, auth({type: 'json'}, username, password)).then(res => {
+    links = parseLink(res.headers.get('Link'));
+    return res.json();
+  });
+  return {
+    result: result.map(selectStar),
+    links,
+  };
+}
+
+export async function fetchUser(username, password) {
+  return await fetch('https://api.github.com/user', auth({}, username, password))
+    .then(res => res.json());
 }

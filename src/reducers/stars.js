@@ -1,19 +1,28 @@
 import { handleActions } from 'redux-actions';
-import * as starActions from '../actions/stars';
 
 const initialState = {
   data: [],
   loading: false,
+  syncAllFinished: false,
 };
 
 export default handleActions({
 
-  'load stars start' (state, action) {
-    return {...state, loading:true};
+  'sync stars start' (state, action) {
+    return {...state, loading:true, status:'sync page 1', data:[], syncAllFinished:false};
   },
 
-  'load stars end' (state, action) {
-    return {...state, data:action.payload, loading:false};
+  'sync stars end' (state, action) {
+    return {...state, data:action.payload, loading:false, status:'', syncAllFinished:true};
   },
+
+  'sync stars firstpage' (state, action) {
+    return {...state, data:action.payload};
+  },
+
+  'sync stars status' (state, action) {
+    const { next, last } = action.payload;
+    return {...state, status:`sync page ${next} of ${last}`};
+  }
 
 }, initialState);

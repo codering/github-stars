@@ -5,8 +5,12 @@
   "dependencies": {
     "atool-build": "0.4.x",
     "babel-polyfill": "^6.3.14",
+    "classnames": "^2.2.3",
+    "font-awesome": "^4.5.0",
     "immutable.js": "^1.1.2",
     "isomorphic-fetch": "^2.2.1",
+    "lodash.pick": "^4.1.0",
+    "normalize.css": "^3.0.3",
     "react": "0.14.x",
     "react-dom": "0.14.x",
     "react-redux": "4.4.x",
@@ -14,8 +18,6 @@
     "react-router-redux": "^2.1.0",
     "redux": "3.3.x",
     "redux-actions": "0.9.x",
-    "redux-devtools": "^3.1.1",
-    "redux-loop": "^1.0.4",
     "redux-saga": "^0.8.2",
     "reselect": "^2.0.3"
   },
@@ -24,23 +26,19 @@
     "dora": "0.2.x",
     "dora-plugin-atool-build": "0.4.x",
     "dora-plugin-hmr": "0.3.x",
-    "dora-plugin-json-server": "0.1.x",
     "dora-plugin-livereload": "0.2.x",
     "dora-plugin-proxy": "0.5.x",
     "eslint": "1.10.x",
     "eslint-config-airbnb": "3.x",
     "eslint-plugin-react": "3.x",
-    "pre-commit": "1.x",
-    "redux-devtools-dock-monitor": "^1.0.1",
-    "redux-devtools-log-monitor": "^1.0.4"
+    "pre-commit": "1.x"
   },
   "pre-commit": [
     "lint"
   ],
   "scripts": {
     "build": "atool-build",
-    "dev": "dora --plugins proxy,atool-build,hmr,livereload,json-server",
-    "lint": "eslint --ext .js,.jsx src",
-    "test": "jest"
+    "dev": "dora --plugins proxy,atool-build,hmr,livereload?enableJs=false",
+    "lint": "eslint --ext .js,.jsx src"
   }
 }
