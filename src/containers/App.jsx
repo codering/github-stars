@@ -24,9 +24,9 @@ class App extends Component {
     }
 
     return (<div className={style.normal}>
-      <Header keyword={uistate.keyword} stars={stars} changeKeyword={_uiStateActions.changeKeyword} />
+      <Header uistate={uistate} changeKeyword={_uiStateActions.changeKeyword} />
       <div className={style.mainSection}>
-        <Sidebar userInfo={user.userInfo} />
+        <Sidebar userInfo={user.userInfo} starsCount={stars.data.length} />
         <Stars keyword={uistate.keyword} stars={stars} actions={_starActions} />
         <Detail unstarLoading={uistate.unstarLoading} unstar={_starActions.unstar} stars={stars} />
       </div>

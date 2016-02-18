@@ -21,6 +21,14 @@ function* syncAll(getState) {
     payload: data,
   });
 
+  yield put({
+    type: 'sync stars status',
+    payload: {
+      next: extractPageFromUrl(links.next),
+      last: extractPageFromUrl(links.last),
+    },
+  });
+
   while(links.next) {
     const object =  yield call(GithubAPI.fetchStars, links.next, username, password);
     links = object.links;

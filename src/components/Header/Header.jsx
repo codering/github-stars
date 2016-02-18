@@ -6,8 +6,8 @@ class Header extends Component {
     this.props.changeKeyword(e.target.value);
   }
   render() {
-    const { keyword, changeKeyword } = this.props;
-    const { loading, status } = this.props.stars;
+    const { changeKeyword } = this.props;
+    const { syncLoading, syncStatus, keyword } = this.props.uistate;
     return (<div className={style.normal}>
       <div className={style.brand}>
         GithubStars
@@ -15,8 +15,8 @@ class Header extends Component {
       <div className={style.search}>
         <input value={keyword} onChange={this.handleInputChange.bind(this)} placeholder="Search by keyword" />
       </div>
-      <div className={style.loading}>
-        {loading ? `loading... , ${status}` : 'loaded'}
+      <div className={style.syncLoading}>
+        {syncLoading ? `loading... , ${syncStatus}` : 'loaded'}
       </div>
     </div>);
   }

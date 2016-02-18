@@ -5,14 +5,17 @@ import fa from 'font-awesome/css/font-awesome.css';
 
 class Login extends Component {
   render() {
-    const { userInfo } = this.props;
+    const { starsCount, userInfo } = this.props;
     return (<div className={style.normal}>
       <div className={style.photo}>
         <img src={`${userInfo['avatar_url']}&s=160`} />
       </div>
       <div className={style.menu}>
         <ul>
-          <li className={style.menuActive}><i className={classnames(fa['fa'], fa['fa-star'])} /> My Stars</li>
+          <li className={style.menuActive}>
+            <i className={classnames(fa['fa'], fa['fa-star'])} /> My Stars
+            <b>{starsCount}</b>
+          </li>
           <li><i className={classnames(fa['fa'], fa['fa-rss'])} /> Feeds</li>
           <li><i className={classnames(fa['fa'], fa['fa-thumbs-up'])} /> Trends</li>
         </ul>
