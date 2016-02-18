@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 
-import * as starActions from '../actions/stars';
-import * as uiStateActions from '../actions/uistate';
-import * as userActions from '../actions/user';
+import * as _actions from '../actions/index';
 
 import Stars from '../components/Stars/Stars';
 import Header from '../components/Header/Header';
@@ -18,17 +16,17 @@ import style from './App.less';
 
 class App extends Component {
   render() {
-    const { user, _uiStateActions, _starActions, _userActions, stars, uistate } = this.props;
+    const { user, stars, uistate, actions } = this.props;
     if (!user.login) {
-      return <Login userLogin={_userActions.userLogin} />;
+      return <Login actions={actions} />;
     }
 
     return (<div className={style.normal}>
-      <Header uistate={uistate} changeKeyword={_uiStateActions.changeKeyword} />
+      <Header uistate={uistate} actions={actions} />
       <div className={style.mainSection}>
         <Sidebar userInfo={user.userInfo} starsCount={stars.data.length} />
-        <Stars keyword={uistate.keyword} stars={stars} actions={_starActions} />
-        <Detail unstarLoading={uistate.unstarLoading} unstar={_starActions.unstar} stars={stars} />
+        <Stars keyword={uistate.keyword} stars={stars} actions={actions} />
+        <Detail unstarLoading={uistate.unstarLoading} actions={actions} stars={stars} />
       </div>
     </div>);
   }
@@ -44,9 +42,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    _starActions: bindActionCreators(starActions, dispatch),
-    _uiStateActions: bindActionCreators(uiStateActions, dispatch),
-    _userActions: bindActionCreators(userActions, dispatch),
+    actions: bindActionCreators(_actions, dispatch),
   };
 }
 

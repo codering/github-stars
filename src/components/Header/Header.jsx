@@ -3,10 +3,9 @@ import style from './Header.less';
 
 class Header extends Component {
   handleInputChange(e) {
-    this.props.changeKeyword(e.target.value);
+    this.props.actions.searchChangeKeyword(e.target.value);
   }
   render() {
-    const { changeKeyword } = this.props;
     const { syncLoading, syncStatus, keyword } = this.props.uistate;
     return (<div className={style.normal}>
       <div className={style.brand}>

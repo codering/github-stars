@@ -8,7 +8,7 @@ function extractPageFromUrl(url) {
 
 function* syncAll(getState) {
   yield put({
-    type: 'sync stars start',
+    type: 'stars/sync/start',
   });
 
   const { username, password, userInfo } = getState().user;
@@ -17,12 +17,12 @@ function* syncAll(getState) {
   let data = result;
 
   yield put({
-    type: 'sync stars firstpage',
+    type: 'stars/sync/firstpage',
     payload: data,
   });
 
   yield put({
-    type: 'sync stars status',
+    type: 'stars/sync/progress',
     payload: {
       next: extractPageFromUrl(links.next),
       last: extractPageFromUrl(links.last),
@@ -36,7 +36,7 @@ function* syncAll(getState) {
 
     data = data.concat(result);
     yield put({
-      type: 'sync stars status',
+      type: 'stars/sync/progress',
       payload: {
         next: extractPageFromUrl(links.next),
         last: extractPageFromUrl(links.last),
@@ -45,7 +45,7 @@ function* syncAll(getState) {
   }
 
   yield put({
-    type: 'sync stars end',
+    type: 'stars/sync/end',
     payload: data,
   });
 }
@@ -55,7 +55,7 @@ function* syncUpate() {
 
 function* sync(getState) {
   while (true) {
-    yield take('sync stars');
+    yield take('stars/sync');
     if (getState().stars.syncAllFinished) {
       yield syncUpate(getState);
     } else {
@@ -66,28 +66,28 @@ function* sync(getState) {
 
 function* login(getState) {
   while (true) {
-    const action = yield take('user login');
+    const action = yield take('user/login');
     const { username, password } = action.payload;
     const userInfo = yield GithubAPI.fetchUser(username, password);
 
     yield put({
-      type: 'user login save',
+      type: 'user/login/save',
       payload: { username, password, userInfo },
     });
     yield put({
-      type: 'sync stars',
+      type: 'stars/sync',
     });
   }
 }
 
 function* unstar(getState) {
   while (true) {
-    const action = yield take('unstar');
+    const action = yield take('stars/unstar');
     const repo = action.payload;
     console.log(repo);
 
     yield put({
-      type: 'unstar start',
+      type: 'stars/unstar/start',
     });
 
     const { username, password } = getState().user;
@@ -97,7 +97,7 @@ function* unstar(getState) {
     }
 
     yield put({
-      type: 'unstar end',
+      type: 'stars/unstar/end',
     });
   }
 }

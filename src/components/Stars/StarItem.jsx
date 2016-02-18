@@ -10,7 +10,7 @@ class StarItem extends Component {
     });
 
     const { id, owner, name, html_url: htmlUrl, description, forks, watchers, language } = this.props.data;
-    return <div className={containerClass} onClick={this.props.selectStar.bind(this, id)}>
+    return <div className={containerClass} onClick={this.props.actions.starsSelect.bind(this, id)}>
       <div className={style.avatar}>
         <img src={owner.avatar_url + '&s=60'} />
       </div>

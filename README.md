@@ -3,8 +3,10 @@
 ## Features
 
 - [ ] Support login with username and password
-- [ ] Support all sync and update sync
-- [ ] Support unstar and star
+- [x] Support all sync
+- [ ] Support update sync
+- [x] Support unstar
+- [ ] Support unstar undo
 - [ ] Support repo detail view (低优先级)
 - [ ] Support feeds (低优先级)
 - [ ] Support trends (低优先级)

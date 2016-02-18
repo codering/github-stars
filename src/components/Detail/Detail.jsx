@@ -5,7 +5,7 @@ import fa from 'font-awesome/css/font-awesome.css';
 
 class Detail extends Component {
   handleUnstar(repo) {
-    this.props.unstar(repo);
+    this.props.actions.starsUnstar(repo);
   }
   render() {
     const { unstarLoading } = this.props;
@@ -16,7 +16,7 @@ class Detail extends Component {
       return <div />;
     }
 
-    const { id, name, owner } = star;
+    const { name, owner } = star;
     const repo = `${owner.login}/${name}`;
 
     return (<div className={style.normal}>

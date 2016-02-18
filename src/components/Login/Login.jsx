@@ -7,7 +7,7 @@ class Login extends Component {
     const username = this.refs.username.value.trim();
     const password = this.refs.password.value.trim();
 
-    this.props.userLogin({username, password});
+    this.props.actions.userLogin({username, password});
   }
   render() {
     return (<div className={style.normal}>

@@ -9,7 +9,7 @@ class Stars extends Component {
     super(props, context);
   }
   componentWillMount() {
-    this.props.actions.syncStars();
+    this.props.actions.starsSync();
   }
   filterData(data) {
     let ret = data;
@@ -32,7 +32,7 @@ class Stars extends Component {
     return data.map(item =>
       <StarItem key={item.id} data={item} keyword={this.props.keyword}
                 selected={selectedStar === item.id}
-                selectStar={this.props.actions.selectStar}
+                actions={this.props.actions}
       />
     );
   }
