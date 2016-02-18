@@ -28,7 +28,7 @@ function auth(opts = {}, username, password) {
 }
 
 export async function fetchStars(url, username, password) {
-  console.log('x', url, username, password);
+  console.log('fetchStars', url);
   let links;
   const result = await fetch(url, auth({type: 'json'}, username, password)).then(res => {
     links = parseLink(res.headers.get('Link'));

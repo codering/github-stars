@@ -20,6 +20,8 @@ class Login extends Component {
           <li><i className={classnames(fa['fa'], fa['fa-thumbs-up'])} /> Trends</li>
         </ul>
       </div>
+
+      <button onClick={this.props.actions.starsUpdate}>update</button>
     </div>);
   }
 }

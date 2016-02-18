@@ -24,8 +24,8 @@ export default handleActions({
     return {...state, loginErrorMsg: ''};
   },
 
-  'stars/sync/start' (state) {
-    return {...state, syncLoading: true, syncStatus: 'sync page 1'};
+  'stars/sync/start' (state, action) {
+    return {...state, syncLoading: true, syncStatus: action.payload};
   },
 
   'stars/sync/end' (state) {

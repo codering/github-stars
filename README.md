@@ -2,9 +2,9 @@
 
 ## Features
 
-- [ ] Support login with username and password
+- [x] Support login with username and password
 - [x] Support all sync
-- [ ] Support update sync
+- [x] Support update sync
 - [x] Support unstar
 - [ ] Support unstar undo
 - [ ] Support repo detail view (低优先级)

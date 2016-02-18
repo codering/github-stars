@@ -6,9 +6,32 @@ function extractPageFromUrl(url) {
   if (url) return url.split('&page=')[1];
 }
 
+function* syncUpdate(getState) {
+  yield put({
+    type: 'stars/sync/start',
+    payload: '',
+  });
+
+  const { user, stars } = getState();
+  const { username, password, userInfo } = user;
+  const url = `https://api.github.com/users/${userInfo.login}/starred?per_page=100&page=1`;
+  const { result } = yield call(GithubAPI.fetchStars, url, username, password);
+  const ids = stars.data.map(item => item.id);
+  const data = result.filter(item => ids.indexOf(item.id) === -1);
+
+  yield put({
+    type: 'stars/sync/save',
+    payload: data.concat(stars.data),
+  });
+  yield put({
+    type: 'stars/sync/end',
+  });
+}
+
 function* syncAll(getState) {
   yield put({
     type: 'stars/sync/start',
+    payload: 'sync page 1',
   });
 
   const { username, password, userInfo } = getState().user;
@@ -46,21 +69,28 @@ function* syncAll(getState) {
 
   yield put({
     type: 'stars/sync/end',
+  });
+  yield put({
+    type: 'stars/sync/save',
     payload: data,
   });
-}
-
-function* syncUpate() {
 }
 
 function* sync(getState) {
   while (true) {
     yield take('stars/sync');
     if (getState().stars.syncAllFinished) {
-      yield syncUpate(getState);
+      yield syncUpdate(getState);
     } else {
       yield syncAll(getState);
     }
+  }
+}
+
+function* update(getState) {
+  while (true) {
+    yield take('stars/update');
+    yield syncUpdate(getState);
   }
 }
 
@@ -120,6 +150,7 @@ function* unstar(getState) {
 
 export default function* root(getState) {
   yield fork(sync, getState);
+  yield fork(update, getState);
   yield fork(login, getState);
   yield fork(unstar, getState);
 }

@@ -7,11 +7,11 @@ const initialState = {
 
 export default handleActions({
 
-  'stars/sync/start' (state, action) {
+  'stars/sync/empty' (state, action) {
     return {...state, data: [], syncAllFinished: false};
   },
 
-  'stars/sync/end' (state, action) {
+  'stars/sync/save' (state, action) {
     return {...state, data: action.payload, syncAllFinished: true};
   },
 
