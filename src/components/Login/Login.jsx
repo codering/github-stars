@@ -10,14 +10,31 @@ class Login extends Component {
     this.props.actions.userLogin({username, password});
   }
   render() {
+    const { loginErrorMsg, loginLoading } = this.props;
     return (<div className={style.normal}>
-      Login
-
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <input placeholder="username" ref="username" />
-        <input placeholder="password" ref="password" type="password" />
-        <input type="submit" value="Submit" />
-      </form>
+      <div className={style.box}>
+        <h2 className={style.title}>Login GithubStars</h2>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          {
+            loginErrorMsg ? <div className={style.loginError}>{loginErrorMsg}</div> : ''
+          }
+          <div className={style.formItem}>
+            <label htmlFor="username">Github Username:</label>
+            <input ref="username" id="username" />
+          </div>
+          <div className={style.formItem}>
+            <label htmlFor="password">Github Password:</label>
+            <input ref="password" id="password" type="password" />
+          </div>
+          <div className={style.formItem}>
+            <label />
+            {
+              loginLoading ? <input type="submit" value="..." disabled />
+                : <input type="submit" value="Submit" />
+            }
+          </div>
+        </form>
+      </div>
     </div>);
   }
 }

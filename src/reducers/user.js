@@ -6,7 +6,7 @@ const initialState = {
 
 export default handleActions({
 
-  'user login save' (state, action) {
+  'user/login/success' (state, action) {
     return {...state, ...action.payload, login: true};
   }
 

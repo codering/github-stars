@@ -67,15 +67,31 @@ function* sync(getState) {
 function* login(getState) {
   while (true) {
     const action = yield take('user/login');
+
+    yield put({
+      type: 'user/login/start',
+    });
+
     const { username, password } = action.payload;
     const userInfo = yield GithubAPI.fetchUser(username, password);
 
+    if (userInfo.message) {
+      yield put({
+        type: 'user/login/error',
+        payload: userInfo.message,
+      });
+    } else {
+      yield put({
+        type: 'user/login/success',
+        payload: {username, password, userInfo},
+      });
+      yield put({
+        type: 'stars/sync',
+      });
+    }
+
     yield put({
-      type: 'user/login/save',
-      payload: { username, password, userInfo },
-    });
-    yield put({
-      type: 'stars/sync',
+      type: 'user/login/end',
     });
   }
 }

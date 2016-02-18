@@ -18,7 +18,9 @@ class App extends Component {
   render() {
     const { user, stars, uistate, actions } = this.props;
     if (!user.login) {
-      return <Login actions={actions} />;
+      return <Login actions={actions}
+                    loginErrorMsg={uistate.loginErrorMsg}
+                    loginLoading={uistate.loginLoading} />;
     }
 
     return (<div className={style.normal}>

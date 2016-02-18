@@ -8,6 +8,22 @@ export default handleActions({
     return {...state, keyword: action.payload};
   },
 
+  'user/login/start' (state) {
+    return {...state, loginLoading: true};
+  },
+
+  'user/login/end' (state) {
+    return {...state, loginLoading: false};
+  },
+
+  'user/login/error' (state, action) {
+    return {...state, loginErrorMsg: action.payload};
+  },
+
+  'user/login/success' (state, action) {
+    return {...state, loginErrorMsg: ''};
+  },
+
   'stars/sync/start' (state) {
     return {...state, syncLoading: true, syncStatus: 'sync page 1'};
   },

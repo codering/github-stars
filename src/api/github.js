@@ -25,10 +25,6 @@ function auth(opts = {}, username, password) {
     ...opts.headers,
     Authorization: `Basic ${btoa(`${username}:${password}`)}`,
   }};
-  //opts.headers = opts.headers || {};
-  //opts.headers.Authorization = `Basic ${btoa(`${username}:${password}`)}`;
-  //console.log(opts, username, password);
-  //return opts;
 }
 
 export async function fetchStars(url, username, password) {
