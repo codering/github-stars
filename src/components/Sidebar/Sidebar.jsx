@@ -5,10 +5,10 @@ import fa from 'font-awesome/css/font-awesome.css';
 
 class Login extends Component {
   render() {
-    const { avatar_url } = this.props.userInfo;
+    const { userInfo } = this.props;
     return (<div className={style.normal}>
       <div className={style.photo}>
-        <img src={`${avatar_url}&s=160`} />
+        <img src={`${userInfo['avatar_url']}&s=160`} />
       </div>
       <div className={style.menu}>
         <ul>

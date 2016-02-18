@@ -18,17 +18,17 @@ import style from './App.less';
 
 class App extends Component {
   render() {
-    const { user, uiStateActions, starActions, userActions, stars, uistate } = this.props;
+    const { user, _uiStateActions, _starActions, _userActions, stars, uistate } = this.props;
     if (!user.login) {
-      return <Login userLogin={userActions.userLogin} />;
+      return <Login userLogin={_userActions.userLogin} />;
     }
 
     return (<div className={style.normal}>
-      <Header keyword={uistate.keyword} stars={stars} changeKeyword={uiStateActions.changeKeyword} />
+      <Header keyword={uistate.keyword} stars={stars} changeKeyword={_uiStateActions.changeKeyword} />
       <div className={style.mainSection}>
         <Sidebar userInfo={user.userInfo} />
-        <Stars keyword={uistate.keyword} stars={stars} actions={starActions} />
-        <Detail unstarLoading={uistate.unstarLoading} unstar={starActions.unstar} stars={stars} />
+        <Stars keyword={uistate.keyword} stars={stars} actions={_starActions} />
+        <Detail unstarLoading={uistate.unstarLoading} unstar={_starActions.unstar} stars={stars} />
       </div>
     </div>);
   }
@@ -44,9 +44,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    starActions: bindActionCreators(starActions, dispatch),
-    uiStateActions: bindActionCreators(uiStateActions, dispatch),
-    userActions: bindActionCreators(userActions, dispatch),
+    _starActions: bindActionCreators(starActions, dispatch),
+    _uiStateActions: bindActionCreators(uiStateActions, dispatch),
+    _userActions: bindActionCreators(userActions, dispatch),
   };
 }
 

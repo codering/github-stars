@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 function parseLink(str) {
   const ret = {};
   str.split(',').forEach(function(item) {
-    var m = item.match(/<(.+?)>; rel=\"(.+?)\"/);
+    const m = item.match(/<(.+?)>; rel=\"(.+?)\"/);
     ret[m[2]] = m[1];
   });
   return ret;
@@ -21,10 +21,14 @@ function selectStar(star) {
 }
 
 function auth(opts = {}, username, password) {
-  opts.headers = opts.headers || {};
-  opts.headers.Authorization = `Basic ${btoa(`${username}:${password}`)}`;
-  console.log(opts, username, password);
-  return opts;
+  return {...opts, headers: {
+    ...opts.headers,
+    Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+  }};
+  //opts.headers = opts.headers || {};
+  //opts.headers.Authorization = `Basic ${btoa(`${username}:${password}`)}`;
+  //console.log(opts, username, password);
+  //return opts;
 }
 
 export async function fetchStars(url, username, password) {

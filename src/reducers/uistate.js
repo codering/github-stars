@@ -9,11 +9,11 @@ export default handleActions({
   },
 
   'unstar start' (state, action) {
-    return {...state, unstarLoading:true};
+    return {...state, unstarLoading: true};
   },
 
   'unstar end' (state, action) {
-    return {...state, unstarLoading:false};
+    return {...state, unstarLoading: false};
   },
 
 }, initialState);

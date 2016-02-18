@@ -9,10 +9,10 @@ class StarItem extends Component {
       [style.selected]: this.props.selected,
     });
 
-    const { id, owner, name, html_url, description, forks, watchers, language } = this.props.data;
+    const { id, owner, name, html_url: htmlUrl, description, forks, watchers, language } = this.props.data;
     return <div className={containerClass} onClick={this.props.selectStar.bind(this, id)}>
       <div className={style.avatar}>
-        <img src={owner.avatar_url+'&s=60'} />
+        <img src={owner.avatar_url + '&s=60'} />
       </div>
       <div className={style.mainSection}>
         <div className={style.name}>{owner.login}<em>/</em>{name}</div>
@@ -23,7 +23,7 @@ class StarItem extends Component {
           {
             language ? <em><i className={classnames(fa['fa'], fa['fa-tint'])} />{language}</em> : ''
           }
-          <a href={html_url} target="_blank">View on github</a>
+          <a href={htmlUrl} target="_blank">View on github</a>
         </div>
       </div>
     </div>;
