@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import StarItem from './StarItem';
 import style from './Stars.less';
+import classnames from 'classnames';
+import fa from 'font-awesome/css/font-awesome.css';
 
 class Stars extends Component {
   constructor(props, context) {
@@ -26,7 +28,13 @@ class Stars extends Component {
     if (!data.length) {
       return <div className={style.empty}>no star found</div>;
     }
-    return data.map(item => <StarItem key={item.id} data={item} keyword={this.props.keyword} />);
+    const { selectedStar } = this.props.stars;
+    return data.map(item =>
+      <StarItem key={item.id} data={item} keyword={this.props.keyword}
+                selected={selectedStar === item.id}
+                selectStar={this.props.actions.selectStar}
+      />
+    );
   }
   render() {
     const { data, loading, status } = this.props.stars;

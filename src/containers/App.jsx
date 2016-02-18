@@ -11,6 +11,7 @@ import Stars from '../components/Stars/Stars';
 import Header from '../components/Header/Header';
 import Login from '../components/Login/Login';
 import Sidebar from '../components/Sidebar/Sidebar';
+import Detail from '../components/Detail/Detail';
 
 import 'normalize.css';
 import style from './App.less';
@@ -21,12 +22,13 @@ class App extends Component {
     if (!user.login) {
       return <Login userLogin={userActions.userLogin} />;
     }
+
     return (<div className={style.normal}>
       <Header keyword={uistate.keyword} stars={stars} changeKeyword={uiStateActions.changeKeyword} />
       <div className={style.mainSection}>
         <Sidebar userInfo={user.userInfo} />
         <Stars keyword={uistate.keyword} stars={stars} actions={starActions} />
-        <div></div>
+        <Detail unstarLoading={uistate.unstarLoading} unstar={starActions.unstar} stars={stars} />
       </div>
     </div>);
   }

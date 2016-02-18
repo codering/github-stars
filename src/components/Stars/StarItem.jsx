@@ -5,8 +5,12 @@ import fa from 'font-awesome/css/font-awesome.css';
 
 class StarItem extends Component {
   render() {
-    const { owner, name, html_url, description, forks, watchers, language } = this.props.data;
-    return <div className={style.normal}>
+    const containerClass = classnames(style.normal, {
+      [style.selected]: this.props.selected,
+    });
+
+    const { id, owner, name, html_url, description, forks, watchers, language } = this.props.data;
+    return <div className={containerClass} onClick={this.props.selectStar.bind(this, id)}>
       <div className={style.avatar}>
         <img src={owner.avatar_url+'&s=60'} />
       </div>

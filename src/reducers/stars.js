@@ -23,6 +23,15 @@ export default handleActions({
   'sync stars status' (state, action) {
     const { next, last } = action.payload;
     return {...state, status:`sync page ${next} of ${last}`};
-  }
+  },
+
+  'select star' (state, action) {
+    return {...state, selectedStar:action.payload};
+  },
+
+  'unstar end' (state, action) {
+    const data = state.data.filter(item => item.id !== state.selectedStar);
+    return {...state, data, selectedStar:null};
+  },
 
 }, initialState);

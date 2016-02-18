@@ -72,7 +72,30 @@ function* login(getState) {
   }
 }
 
+function* unstar(getState) {
+  while (true) {
+    const action = yield take('unstar');
+    const repo = action.payload;
+    console.log(repo);
+
+    yield put({
+      type: 'unstar start',
+    });
+
+    const { username, password } = getState().user;
+    const res = yield GithubAPI.unstar(repo, username, password);
+    if (res.status !== 204) {
+      throw Error('Error: status should be 204');
+    }
+
+    yield put({
+      type: 'unstar end',
+    });
+  }
+}
+
 export default function* root(getState) {
   yield fork(sync, getState);
   yield fork(login, getState);
+  yield fork(unstar, getState);
 }

@@ -23,6 +23,7 @@ function selectStar(star) {
 function auth(opts = {}, username, password) {
   opts.headers = opts.headers || {};
   opts.headers.Authorization = `Basic ${btoa(`${username}:${password}`)}`;
+  console.log(opts, username, password);
   return opts;
 }
 
@@ -42,4 +43,10 @@ export async function fetchStars(url, username, password) {
 export async function fetchUser(username, password) {
   return await fetch('https://api.github.com/user', auth({}, username, password))
     .then(res => res.json());
+}
+
+export async function unstar(repo, username, password) {
+  return await fetch(`https://api.github.com/user/starred/${repo}`, auth({
+    method: 'DELETE',
+  }, username, password));
 }
