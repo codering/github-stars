@@ -8,6 +8,6 @@ export const starsSelect = createAction('stars/select');
 export const starsUnstar = createAction('stars/unstar');
 export const starsGetReadme = createAction('stars/getReadme');
 
-export const searchChangeKeyword = createAction('search/changeKeyword');
+export const headerSearch = createAction('header/search');
 
 export const readmeFetch = createAction('readme/fetch');

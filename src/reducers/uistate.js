@@ -4,7 +4,7 @@ const initialState = {};
 
 export default handleActions({
 
-  'search/changeKeyword' (state, action) {
+  'header/search/save' (state, action) {
     return {...state, keyword: action.payload};
   },
 

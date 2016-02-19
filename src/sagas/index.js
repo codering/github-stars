@@ -1,8 +1,13 @@
 /* eslint-disable no-constant-condition */
 
 import { takeEvery, takeLatest } from 'redux-saga';
-import { fork, take, call, put } from 'redux-saga/effects';
+import { fork, take, call, put, cancel } from 'redux-saga/effects';
+import { isCancelError } from 'redux-saga';
 import * as GithubAPI from '../api/github';
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function extractPageFromUrl(url) {
   if (url) return url.split('&page=')[1];
@@ -194,8 +199,38 @@ function* starsSelect(getState) {
   }
 }
 
+function* headerSearchSet(query) {
+  try {
+    // debounce
+    yield call(delay, 300);
+
+    yield put({
+      type: 'header/search/save',
+      payload: query,
+    });
+  } catch(e) {
+    if(!isCancelError(e)) {
+      // handle error
+    }
+  }
+}
+
+function* headerSearch(getState) {
+  let previousQuery, task;
+
+  while (true) {
+    const { payload: query } = yield take('header/search');
+    if (query !== previousQuery) {
+      if (task) yield cancel(task);
+      task = yield fork(headerSearchSet, query);
+      previousQuery = query;
+    }
+  }
+}
+
 export default function* root(getState) {
   yield fork(readmeFetch, getState);
+  yield fork(headerSearch, getState);
   yield fork(starsSelect, getState);
   yield fork(sync, getState);
   yield fork(update, getState);

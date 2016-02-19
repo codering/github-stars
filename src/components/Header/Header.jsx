@@ -2,17 +2,26 @@ import React, { Component } from 'react';
 import style from './Header.less';
 
 class Header extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      query: '',
+    };
+  }
   handleInputChange(e) {
-    this.props.actions.searchChangeKeyword(e.target.value);
+    this.setState({
+      query: e.target.value,
+    });
+    this.props.actions.headerSearch(e.target.value);
   }
   render() {
-    const { syncLoading, syncStatus, keyword } = this.props.uistate;
+    const { syncLoading, syncStatus } = this.props.uistate;
     return (<div className={style.normal}>
       <div className={style.brand}>
         GithubStars
       </div>
       <div className={style.search}>
-        <input value={keyword} onChange={this.handleInputChange.bind(this)} placeholder="Search by keyword" />
+        <input value={this.state.query} onChange={this.handleInputChange.bind(this)} placeholder="Search by keyword" />
       </div>
       <div className={style.syncLoading}>
         {syncLoading ? `loading... , ${syncStatus}` : 'loaded'}
