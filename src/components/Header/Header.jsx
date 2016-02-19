@@ -20,7 +20,10 @@ class Header extends Component {
     const { syncLoading, syncStatus } = this.props.uistate;
     return (<div className={style.normal}>
       <div className={style.brand}>
-        GithubStars
+        <h1>GithubStars</h1>
+        <div>
+          <i className={classnames(fa['fa'], fa['fa-refresh'])} onClick={this.props.actions.starsUpdate} />
+        </div>
       </div>
       <div className={style.search}>
         <input value={this.state.query} onChange={this.handleInputChange.bind(this)} placeholder="Search by keyword" />
