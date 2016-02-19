@@ -3,11 +3,11 @@ import rootReducer from '../reducers/index';
 import { syncHistory } from 'react-router-redux';
 import { hashHistory } from 'react-router';
 import createSagaMiddleware from 'redux-saga';
-import saga from '../saga/index';
+import sagas from '../sagas/index';
 
 export default function configure(initialState) {
   const enhancer = compose(
-    applyMiddleware(syncHistory(hashHistory), createSagaMiddleware(saga)),
+    applyMiddleware(syncHistory(hashHistory), createSagaMiddleware(sagas)),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   );
   const store = createStore(rootReducer, initialState, enhancer);
