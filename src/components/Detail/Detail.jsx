@@ -1,23 +1,34 @@
 import React, { Component } from 'react';
 import style from './Detail.less';
+import marked from 'marked';
 import classnames from 'classnames';
 import fa from 'font-awesome/css/font-awesome.css';
 
 class Detail extends Component {
+  componentWillMount() {
+    const repo = this.getRepo();
+    if (repo) {
+      this.props.actions.readmeFetch(repo);
+    }
+  }
+  getRepo() {
+    const { data, selectedStar } = this.props.stars;
+    const star = data.filter(item => item.id === selectedStar)[0];
+    if (star) {
+      const { name, owner } = star;
+      return `${owner.login}/${name}`;
+    }
+  }
   handleUnstar(repo) {
     this.props.actions.starsUnstar(repo);
   }
   render() {
-    const { unstarLoading } = this.props;
-    const { data, selectedStar } = this.props.stars;
-    const star = data.filter(item => item.id === selectedStar)[0];
+    const { readmeLoading, unstarLoading, readme } = this.props;
+    const repo = this.getRepo();
 
-    if (!star) {
+    if (!repo) {
       return <div />;
     }
-
-    const { name, owner } = star;
-    const repo = `${owner.login}/${name}`;
 
     return (<div className={style.normal}>
       <div className={style.topbar}>
@@ -35,7 +46,16 @@ class Detail extends Component {
         </div>
       </div>
       <div className={style.readme}>
-        README
+        {
+          readmeLoading
+          ? <div className={style.readmeLoading}>Loading</div>
+          : ''
+        }
+        {
+          readme[repo]
+          ? <div className={style.content} dangerouslySetInnerHTML={{__html: marked(atob(readme[repo]))}} />
+          : ''
+        }
       </div>
     </div>);
   }

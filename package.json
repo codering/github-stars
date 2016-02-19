@@ -10,6 +10,7 @@
     "immutable.js": "^1.1.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash.pick": "^4.1.0",
+    "marked": "^0.3.5",
     "normalize.css": "^3.0.3",
     "react": "0.14.x",
     "react-dom": "0.14.x",

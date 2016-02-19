@@ -8,6 +8,14 @@ export default handleActions({
     return {...state, keyword: action.payload};
   },
 
+  'readme/fetch/start' (state) {
+    return {...state, readmeLoading: true};
+  },
+
+  'readme/fetch/end' (state) {
+    return {...state, readmeLoading: false};
+  },
+
   'user/login/start' (state) {
     return {...state, loginLoading: true};
   },

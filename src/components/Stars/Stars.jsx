@@ -5,9 +5,6 @@ import classnames from 'classnames';
 import fa from 'font-awesome/css/font-awesome.css';
 
 class Stars extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
   componentWillMount() {
     this.props.actions.starsSync();
   }

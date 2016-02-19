@@ -19,7 +19,7 @@ export default handleActions({
     return {...state, data: action.payload};
   },
 
-  'stars/select' (state, action) {
+  'stars/select/save' (state, action) {
     return {...state, selectedStar: action.payload};
   },
 

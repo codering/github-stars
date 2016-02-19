@@ -150,7 +150,53 @@ function* unstar(getState) {
   }
 }
 
+function* readmeFetch(getState) {
+  while (true) {
+    const action = yield take('readme/fetch');
+    const repo = action.payload;
+
+    const { readme, user } = getState();
+    const { username, password } = user;
+
+    if (!readme[repo]) {
+      yield put({
+        type: 'readme/fetch/start',
+      });
+      const result = yield GithubAPI.getReadme(repo, username, password);
+      console.log('result', result);
+      yield put({
+        type: 'readme/save',
+        payload: {
+          repo,
+          content: result.content,
+        },
+      });
+      yield put({
+        type: 'readme/fetch/end',
+      });
+    }
+  }
+}
+
+function* starsSelect(getState) {
+  while (true) {
+    const action = yield take('stars/select');
+    const { id, repo } = action.payload;
+
+    yield put({
+      type: 'stars/select/save',
+      payload: id,
+    });
+    yield put({
+      type: 'readme/fetch',
+      payload: repo,
+    });
+  }
+}
+
 export default function* root(getState) {
+  yield fork(readmeFetch, getState);
+  yield fork(starsSelect, getState);
   yield fork(sync, getState);
   yield fork(update, getState);
   yield fork(login, getState);

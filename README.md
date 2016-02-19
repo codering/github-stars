@@ -17,4 +17,5 @@
 - [x] css-modules
 - [ ] reselect (如果需要)
 - [ ] immutable.js (如果需要)
+- [ ] debug
 

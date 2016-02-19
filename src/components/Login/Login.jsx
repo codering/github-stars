@@ -13,7 +13,7 @@ class Login extends Component {
     const { loginErrorMsg, loginLoading } = this.props;
     return (<div className={style.normal}>
       <div className={style.box}>
-        <h2 className={style.title}>Login GithubStars</h2>
+        <h2 className={style.title}>Login to GithubStars</h2>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {
             loginErrorMsg ? <div className={style.loginError}>{loginErrorMsg}</div> : ''

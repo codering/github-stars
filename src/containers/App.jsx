@@ -16,7 +16,7 @@ import style from './App.less';
 
 class App extends Component {
   render() {
-    const { user, stars, uistate, actions } = this.props;
+    const { user, stars, uistate, actions, readme } = this.props;
     if (!user.login) {
       return <Login actions={actions}
                     loginErrorMsg={uistate.loginErrorMsg}
@@ -28,7 +28,11 @@ class App extends Component {
       <div className={style.mainSection}>
         <Sidebar userInfo={user.userInfo} starsCount={stars.data.length} actions={actions} />
         <Stars keyword={uistate.keyword} stars={stars} actions={actions} />
-        <Detail unstarLoading={uistate.unstarLoading} actions={actions} stars={stars} />
+        <Detail unstarLoading={uistate.unstarLoading}
+                readmeLoading={uistate.readmeLoading}
+                readme={readme}
+                actions={actions}
+                stars={stars} />
       </div>
     </div>);
   }
@@ -39,6 +43,7 @@ function mapStateToProps(state) {
     stars: state.stars,
     uistate: state.uistate,
     user: state.user,
+    readme: state.readme,
   };
 }
 
