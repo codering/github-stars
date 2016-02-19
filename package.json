@@ -7,6 +7,7 @@
     "babel-polyfill": "^6.3.14",
     "classnames": "^2.2.3",
     "font-awesome": "^4.5.0",
+    "github-markdown-css": "^2.2.1",
     "immutable.js": "^1.1.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash.pick": "^4.1.0",

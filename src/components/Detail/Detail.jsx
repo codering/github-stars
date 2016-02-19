@@ -3,6 +3,7 @@ import style from './Detail.less';
 import marked from 'marked';
 import classnames from 'classnames';
 import fa from 'font-awesome/css/font-awesome.css';
+import gm from 'github-markdown-css';
 
 class Detail extends Component {
   componentWillMount() {
@@ -53,7 +54,7 @@ class Detail extends Component {
         }
         {
           readme[repo]
-          ? <div className={style.content} dangerouslySetInnerHTML={{__html: marked(atob(readme[repo]))}} />
+          ? <div className={gm['markdown-body']} dangerouslySetInnerHTML={{__html: marked(atob(readme[repo]))}} />
           : ''
         }
       </div>
