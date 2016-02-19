@@ -21,13 +21,14 @@
   display: flex;
 
   > :nth-child(1) {
-    min-width: 220px;
+    width: 220px;
   }
   > :nth-child(2) {
-    min-width: 375px;
+    width: 375px;
     border-right: 1px solid rgba(55,53,112,0.1);
   }
   > :nth-child(3) {
-    flex: 1;
+    flex: 1 0 0;
+    min-width: 0;
   }
 }
