@@ -22,7 +22,11 @@ class Header extends Component {
       <div className={style.brand}>
         <h1>GithubStars</h1>
         <div>
-          <i className={classnames(fa['fa'], fa['fa-refresh'])} onClick={this.props.actions.starsUpdate} />
+          {
+            syncLoading
+              ? <i className={classnames(fa['fa'], fa['fa-refresh'], style.spin)} />
+              : <i className={classnames(fa['fa'], fa['fa-refresh'])} onClick={this.props.actions.starsUpdate} />
+          }
         </div>
       </div>
       <div className={style.search}>
@@ -30,7 +34,7 @@ class Header extends Component {
         <i className={classnames(fa['fa'], fa['fa-search'])} />
       </div>
       <div className={style.syncLoading}>
-        {syncLoading ? `loading... , ${syncStatus}` : 'loaded'}
+        {syncLoading ? `${syncStatus}` : ''}
       </div>
     </div>);
   }
