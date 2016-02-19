@@ -1,3 +1,5 @@
+/* eslint-disable no-constant-condition */
+
 import { takeEvery, takeLatest } from 'redux-saga';
 import { fork, take, call, put } from 'redux-saga/effects';
 import * as GithubAPI from '../api/github';
