@@ -23,6 +23,9 @@ class Detail extends Component {
   handleUnstar(repo) {
     this.props.actions.starsUnstar(repo);
   }
+  handleInputClick(e) {
+    e.target.select();
+  }
   render() {
     const { readmeLoading, unstarLoading, readme } = this.props;
     const repo = this.getRepo();
@@ -43,7 +46,7 @@ class Detail extends Component {
           }
         </div>
         <div className={style.clone}>
-          Clone: <input textselect value={`git@github.com:${repo}.git`} readOnly />
+          Clone: <input textselect value={`git@github.com:${repo}.git`} readOnly onClick={this.handleInputClick} />
         </div>
       </div>
       <div className={style.readme}>
