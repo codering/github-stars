@@ -155,10 +155,8 @@ function* unstar(getState) {
   }
 }
 
-function* readmeFetch(getState) {
-  while (true) {
-    const action = yield take('readme/fetch');
-    const repo = action.payload;
+function* readmeFetch(getState, action) {
+    const { payload: repo } = action;
 
     const { readme, user } = getState();
     const { username, password } = user;
@@ -180,7 +178,10 @@ function* readmeFetch(getState) {
         type: 'readme/fetch/end',
       });
     }
-  }
+}
+
+function* readmeFetchEvery(getState) {
+  yield takeEvery('readme/fetch', readmeFetch, getState);
 }
 
 function* starsSelect(getState) {
@@ -229,7 +230,7 @@ function* headerSearch(getState) {
 }
 
 export default function* root(getState) {
-  yield fork(readmeFetch, getState);
+  yield fork(readmeFetchEvery, getState);
   yield fork(headerSearch, getState);
   yield fork(starsSelect, getState);
   yield fork(sync, getState);

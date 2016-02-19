@@ -7,7 +7,7 @@
 - [x] Support update sync
 - [x] Support unstar
 - [ ] Support unstar undo
-- [ ] Search debounce
+- [x] Search debounce
 - [ ] Support repo detail view (低优先级)
 - [ ] Support feeds (低优先级)
 - [ ] Support trends (低优先级)
