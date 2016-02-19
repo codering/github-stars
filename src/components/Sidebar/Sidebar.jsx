@@ -16,8 +16,8 @@ class Login extends Component {
             <i className={classnames(fa['fa'], fa['fa-star'])} /> My Stars
             <b>{starsCount}</b>
           </li>
-          <li><i className={classnames(fa['fa'], fa['fa-rss'])} /> Feeds</li>
-          <li><i className={classnames(fa['fa'], fa['fa-thumbs-up'])} /> Trends</li>
+          <li><i className={classnames(fa['fa'], fa['fa-rss'])} /> Feeds [WIP]</li>
+          <li><i className={classnames(fa['fa'], fa['fa-thumbs-up'])} /> Trends [WIP]</li>
         </ul>
       </div>
 

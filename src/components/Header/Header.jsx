@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import style from './Header.less';
+import classnames from 'classnames';
+import fa from 'font-awesome/css/font-awesome.css';
 
 class Header extends Component {
   constructor(props, context) {
@@ -22,6 +24,7 @@ class Header extends Component {
       </div>
       <div className={style.search}>
         <input value={this.state.query} onChange={this.handleInputChange.bind(this)} placeholder="Search by keyword" />
+        <i className={classnames(fa['fa'], fa['fa-search'])} />
       </div>
       <div className={style.syncLoading}>
         {syncLoading ? `loading... , ${syncStatus}` : 'loaded'}
