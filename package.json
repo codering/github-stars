@@ -30,6 +30,8 @@
     "dora-plugin-hmr": "0.3.x",
     "dora-plugin-livereload": "0.2.x",
     "dora-plugin-proxy": "0.5.x",
+    "electron-packager": "^5.2.1",
+    "electron-prebuilt": "^0.36.8",
     "eslint": "1.10.x",
     "eslint-config-airbnb": "3.x",
     "eslint-plugin-react": "3.x",
@@ -40,6 +42,7 @@
     "lint"
   ],
   "scripts": {
+    "start": "electron ./main.js",
     "build": "atool-build",
     "dev": "dora --plugins proxy,atool-build,hmr,livereload?enableJs=false",
     "lint": "eslint --ext .js,.jsx src",

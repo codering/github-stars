@@ -1,3 +1,4 @@
+import '../../index.html';
 import 'babel-polyfill';
 import { Provider } from 'react-redux';
 import { Router, Route, hashHistory } from 'react-router';

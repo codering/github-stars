@@ -6,5 +6,9 @@ module.exports = function(webpackConfig) {
         'css?modules&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]');
     }
   });
+  webpackConfig.module.loaders.push({
+    test: /\.html?$/,
+    loader: 'file?name=[name].[ext]',
+  });
   return webpackConfig;
 };
