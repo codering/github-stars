@@ -166,7 +166,6 @@ function* readmeFetch(getState, action) {
         type: 'readme/fetch/start',
       });
       const result = yield GithubAPI.getReadme(repo, username, password);
-      console.log('result', result);
       yield put({
         type: 'readme/save',
         payload: {

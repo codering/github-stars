@@ -1,35 +1,24 @@
 import React, { Component } from 'react';
 import style from './Detail.less';
-import marked from 'marked';
 import classnames from 'classnames';
 import fa from 'font-awesome/css/font-awesome.css';
 import gm from 'github-markdown-css';
 
 class Detail extends Component {
   componentWillMount() {
-    const repo = this.getRepo();
+    const { repo } = this.props;
     if (repo) {
       this.props.actions.readmeFetch(repo);
     }
   }
-  getRepo() {
-    const { data, selectedStar } = this.props.stars;
-    const star = data.filter(item => item.id === selectedStar)[0];
-    if (star) {
-      const { name, owner } = star;
-      return `${owner.login}/${name}`;
-    }
-  }
-  handleUnstar(repo) {
-    this.props.actions.starsUnstar(repo);
+  handleUnstar() {
+    this.props.actions.starsUnstar(this.props.repo);
   }
   handleInputClick(e) {
     e.target.select();
   }
   render() {
-    const { readmeLoading, unstarLoading, readme } = this.props;
-    const repo = this.getRepo();
-
+    const { readmeLoading, unstarLoading, repo, readme } = this.props;
     if (!repo) {
       return <div />;
     }
@@ -40,7 +29,7 @@ class Detail extends Component {
           {
             unstarLoading
               ? <button disabled><i className={classnames(fa['fa'], fa['fa-spinner'])} /></button>
-              : <button onClick={this.handleUnstar.bind(this, repo)}>
+              : <button onClick={this.handleUnstar.bind(this)}>
                   <i className={classnames(fa['fa'], fa['fa-star-o'])} /> Unstar
                 </button>
           }
@@ -56,9 +45,7 @@ class Detail extends Component {
           : ''
         }
         {
-          readme[repo]
-          ? <div className={gm['markdown-body']} dangerouslySetInnerHTML={{__html: marked(atob(readme[repo]))}} />
-          : ''
+          readme ? <div className={gm['markdown-body']} dangerouslySetInnerHTML={{__html: readme}} /> : ''
         }
       </div>
     </div>);

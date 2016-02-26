@@ -20,12 +20,12 @@ export default handleActions({
   },
 
   'stars/select/save' (state, action) {
-    return {...state, selectedStar: action.payload};
+    return {...state, selectedStarId: action.payload};
   },
 
   'stars/unstar/end' (state, action) {
-    const data = state.data.filter(item => item.id !== state.selectedStar);
-    return {...state, data, selectedStar: null};
+    const data = state.data.filter(item => item.id !== state.selectedStarId);
+    return {...state, data, selectedStarId: null};
   },
 
 }, initialState);
