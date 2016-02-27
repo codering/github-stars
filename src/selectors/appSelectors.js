@@ -38,7 +38,8 @@ const detailSelector = createSelector([
 
   let readme;
   if (repo && _readme[repo]) {
-    readme = marked(atob(_readme[repo]));
+    // Fix encode. Ref: http://blog.sqrtthree.com/2015/08/29/utf8-to-b64/
+    readme = marked(decodeURIComponent(escape(atob(_readme[repo]))));
   }
 
   return { readme, repo };
