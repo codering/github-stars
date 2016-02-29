@@ -42,6 +42,7 @@
   ],
   "scripts": {
     "start": "electron ./main.js",
+    "start-hot": "HOT=1 electron ./main.js",
     "build": "atool-build",
     "dev": "dora --plugins proxy,atool-build,hmr,livereload?enableJs=false",
     "lint": "eslint --ext .js,.jsx src",

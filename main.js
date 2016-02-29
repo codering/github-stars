@@ -8,6 +8,10 @@ app.on('ready', () => {
     height: 690,
     show: false,
   });
-  win.loadURL(`file://${__dirname}/dist/index.html`);
+  if (process.env.HOT) {
+    win.loadURL(`http://127.0.0.1:8989/index-hot.html`);
+  } else {
+    win.loadURL(`file://${__dirname}/dist/index.html`);
+  }
   win.show();
 });
