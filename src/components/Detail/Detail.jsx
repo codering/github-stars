@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import style from './Detail.less';
 import classnames from 'classnames';
 import fa from 'font-awesome/css/font-awesome.css';
@@ -10,6 +11,13 @@ class Detail extends Component {
     if (repo) {
       this.props.actions.readmeFetch(repo);
     }
+  }
+  componentDidUpdate() {
+    // Force reflow for electron
+    const el = findDOMNode(this);
+    el.style.display = 'none';
+    el.offsetHeight; // eslint-disable-line
+    el.style.display = '';
   }
   handleUnstar() {
     this.props.actions.starsUnstar(this.props.repo);
